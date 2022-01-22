@@ -1,0 +1,7 @@
+@import url('./colorpalette_dark.css');
+@import url('./colorpalette_light.css');
+
+body {
+    background-color: var(--background_root);
+    font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;;
+}

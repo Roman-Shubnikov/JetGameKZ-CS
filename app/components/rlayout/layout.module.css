@@ -1,0 +1,10 @@
+.root {
+    margin-top: 68px;
+    
+}
+
+@media screen and (min-width: 600px) {
+    .root {
+        margin-left: 100px;
+    }
+}

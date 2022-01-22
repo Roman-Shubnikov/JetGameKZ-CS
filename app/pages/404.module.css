@@ -1,0 +1,13 @@
+.root {
+    margin: 0 auto;
+    margin-top: 25vh;
+    font-size: 40px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.red {
+    color: var(--red);
+}

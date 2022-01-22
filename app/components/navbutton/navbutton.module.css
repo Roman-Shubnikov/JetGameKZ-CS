@@ -1,0 +1,8 @@
+.root {
+    background-color: var(--nav_button-background);
+    border-radius: 17px;
+    padding: 13px 19px 10px;
+    align-items: flex-start;
+    width: 60px;
+    margin: 7.5px 20px;
+}

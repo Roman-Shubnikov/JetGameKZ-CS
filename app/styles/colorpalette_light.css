@@ -1,0 +1,5 @@
+body[scheme="light"] {
+    --background_root: #FFFFFF;
+    --nav_button-background: #CACACA;
+    --red: '#FF0000';
+}

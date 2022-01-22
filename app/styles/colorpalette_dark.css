@@ -1,0 +1,5 @@
+body[scheme="dark"] {
+    --background_root: #000;
+    --nav_button-background: #222222;
+    --red: '#FF0000';
+}
