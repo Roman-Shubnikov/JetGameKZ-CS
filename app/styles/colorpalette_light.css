@@ -1,5 +1,9 @@
 body[scheme="light"] {
     --background_root: #FFFFFF;
     --nav_button-background: #CACACA;
-    --red: '#FF0000';
+    --red: #FF0000;
+    --sign_background: #D6D6D6;
+    --text: #000000;
+    --text_description: #969696;
+    --text_footer: #757575;
 }

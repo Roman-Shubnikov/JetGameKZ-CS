@@ -1,7 +1,20 @@
 @import url('./colorpalette_dark.css');
 @import url('./colorpalette_light.css');
+@import url('./fonts/main.css');
+
+a { 
+    cursor: pointer;
+}
 
 body {
-    background-color: var(--background_root);
-    font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;;
+    background-color: var(--background_root) !important;
+    font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;
+}
+.header {
+    font-weight: bold;
+    color: var(--text);
+}
+.description {
+    font-weight: normal;
+    color: var(--text_description);
 }

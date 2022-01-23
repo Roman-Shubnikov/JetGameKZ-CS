@@ -1,10 +1,29 @@
 .root {
-    margin-top: 68px;
-    
+    margin: 108px 40px;
 }
 
 @media screen and (min-width: 600px) {
     .root {
-        margin-left: 100px;
+        margin: 108px 40px 0 140px;
     }
+}
+
+.contacts {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 40px !important;
+    margin-top: 80px;
+}
+.contacts_column {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text_footer);
+
+}
+.contacts_column:last-child {
+    align-items: end;
+}
+.contacts_column:first-child {
+    align-items: start;
 }

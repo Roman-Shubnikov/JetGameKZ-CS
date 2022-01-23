@@ -7,10 +7,10 @@ import Link from 'next/link'
 const Error404 = () => {
     return (
       <div className={styles.root}>
-        <h1 style={{color: 'red'}}>404</h1>
+        <h1 className={styles.red}>404</h1>
         <Box sx={{fontSize: 20, textAlign: 'center', mb: 10}}>{lang.t('nav.404')}</Box>
         <Link href='/'>
-            <Button size='large' variant='contained' color='red'>
+            <Button size='large' variant='contained'>
                 {lang.t('nav.main')}
             </Button>
         </Link>

@@ -1,0 +1,8 @@
+.root {
+    background-color: var(--sign_background);
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    padding: 10px;
+    min-height: 60px;
+}

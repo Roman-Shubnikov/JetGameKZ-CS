@@ -7,6 +7,7 @@ import {
     Toolbar, 
     InputBase
 } from '@mui/material'
+import Link from 'next/link'
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './layout.module.css'
@@ -22,6 +23,7 @@ import { DARK, LIGHT } from '../../src/theme';
 import { accountActions } from '../../store/main';
 import { useSelector, useDispatch } from 'react-redux';
 import { SOCIAL_MEDIA } from '../../config';
+import { Caption, SignBase } from '..';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -47,7 +49,6 @@ export const RLayout = ({ children}) => {
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
         </DrawerHeader>
-        <Divider />
         <WellNavButton href='/' icon='/navbar/house.svg' placeholder={lang.t('nav.main')} />
         <WellNavButton href='/market' icon='/navbar/market.svg' placeholder={lang.t('nav.market')} />
         <WellNavButton href='/support' icon='/navbar/support.svg' placeholder={lang.t('nav.main')} />
@@ -102,7 +103,7 @@ export const RLayout = ({ children}) => {
     return(
         <>
             <Box>
-                <AppBar sx={{zIndex: (theme) => theme.zIndex.drawer+1}} position='fixed'>
+                <AppBar sx={{zIndex: (theme) => theme.zIndex.drawer+1, boxShadow: 'none',}} position='fixed'>
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -114,7 +115,7 @@ export const RLayout = ({ children}) => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Box sx={{mx: {xs:'calc(calc(100vw - 68px) / 4)', sm: 0}}}>
+                        <Box sx={{ml: {xs:'calc(100% / 2 - 68px)', sm: 0}}}>
                             <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} height={39} width={68} />
                         </Box>
                         
@@ -148,6 +149,7 @@ export const RLayout = ({ children}) => {
                     '.MuiDrawer-paper': {
                         overflow: 'hidden',
                         width: 100,
+                        borderRight: 'none',
                         backgroundColor: (theme) => theme.palette.primary.main
                     }}} variant='permanent'>
                     {drawer}
@@ -165,6 +167,68 @@ export const RLayout = ({ children}) => {
             </Box>
             <div className={styles.root} id='171837'>
                 {children}
+                <footer>
+                    <SignBase className={styles.contacts}>
+                        
+                        <Box sx={{display: { xs: 'none', sm: 'flex' }}} className={styles.contacts_column} alignItems='left'>
+                            <Link href='/contacts'>
+                                <Caption isLink>
+                                    {lang.t('repeated.contacts')}
+                                </Caption>
+                            </Link>
+                            <Link href='/help'>
+                                <Caption isLink>
+                                    {lang.t('repeated.help')}
+                                </Caption>
+                            </Link>
+                        </Box>
+
+                        <Box sx={{display: 'flex'}} className={styles.contacts_column}>
+                            <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} height={39} width={68}
+                            style={{marginBottom: 10}} />
+                            <Caption>
+                                {lang.t('repeated.copyright')}
+                            </Caption>
+                        </Box>
+                        <Box sx={{display: { xs: 'none', sm: 'flex' }}} className={styles.contacts_column}>
+                            <Link href='/user_accept'>
+                                <Caption isLink>
+                                    {lang.t('repeated.user_accept')}
+                                </Caption>
+                            </Link>
+                            <Link href='/market'>
+                                <Caption isLink>
+                                    {lang.t('repeated.market')}
+                                </Caption>
+                            </Link>
+                            
+                        </Box>
+                        <Box sx={{ml: 2, display: { xs: 'block', sm: 'none !important' }}} className={styles.contacts_column}>
+                            <Link href='/contacts'>
+                                <Caption isLink>
+                                    {lang.t('repeated.contacts')}
+                                </Caption>
+                            </Link>
+                            <Link href='/help'>
+                                <Caption isLink>
+                                    {lang.t('repeated.help')}
+                                </Caption>
+                            </Link>
+                            <Link href='/user_accept'>
+                                <Caption isLink>
+                                    {lang.t('repeated.user_accept')}
+                                </Caption>
+                            </Link>
+                            <Link href='/market'>
+                                <Caption isLink>
+                                    {lang.t('repeated.market')}
+                                </Caption>
+                            </Link>
+                            
+                        </Box>
+                    </SignBase>
+                </footer>
+                
             </div>
         </>
     )

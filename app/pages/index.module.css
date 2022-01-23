@@ -1,0 +1,71 @@
+.promo_sign {
+    padding-bottom: 0;
+    align-items: center;
+}
+.promo_all {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 30px;
+    width: 100%;
+    background: url('/assets/JETGAME_big.png') 10% no-repeat;
+}
+.promo_texts {
+    width: 30%;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.promo_header {
+    font-size: 48px;
+}
+.promo_description {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.promo_button {
+    margin: 0 auto;
+}
+.promo_container_img {
+    width: 40%;
+    overflow: visible;
+}
+.promo_img {
+    /* top: -80px; */
+    bottom: 0;
+    position: absolute;
+    height: 140%;
+}
+@media screen and (max-width: 1350px) {
+    .promo_img {
+        height: 120%;
+    }
+    .promo_header {
+        font-size: 3.5vw;
+    }
+    .promo_description {
+        font-size: 2vw;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .promo_container_img {
+        display: none;
+    }
+    .promo_texts {
+        width: 100%;
+    }
+    .promo_all {
+        background: url('/assets/JETGAME_small.png') 10% no-repeat;
+    }
+}
+@media screen and (max-width: 600px) {
+    .promo_header {
+        font-size: 29px;
+    }
+    .promo_description {
+        font-size: 12px;
+    }
+}

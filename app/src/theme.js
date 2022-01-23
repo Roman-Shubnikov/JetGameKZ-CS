@@ -27,6 +27,21 @@ export const theme_light = createTheme({
       fontWeight: 600,
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          background: '#FF0000',
+          border: 0,
+          borderRadius: 13,
+          boxShadow: '0 3px 5px 2px rgba(255, 0, 0, .3)',
+          color: 'white',
+          height: 48,
+          padding: '0 30px',
+        },
+      }
+    },
+  }
 });
 export const theme_dark = createTheme({
     palette: {
@@ -49,10 +64,25 @@ export const theme_dark = createTheme({
         color: "#fff"
       },
       button: {
-        fontWeight: 800,
+        fontWeight: 600,
       },
       
     },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            background: '#FF0000',
+            border: 0,
+            borderRadius: 13,
+            boxShadow: '0 3px 5px 2px rgba(255, 0, 0, .3)',
+            color: 'white',
+            height: 48,
+            padding: '0 30px',
+          },
+        }
+      },
+    }
   });
 
 
