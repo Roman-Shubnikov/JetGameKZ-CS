@@ -8,5 +8,7 @@ i18n.defaultLocale = 'ru';
 i18n.locale = 'ru';
 i18n.fallbacks = true;
 i18n.translations = { ru, en, kz };
-
+i18n.changeLanguage = (locale) => {
+    i18n.locale = locale
+}
 export default i18n;

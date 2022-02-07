@@ -1,3 +1,15 @@
 {
-    
+    "repeated": {
+        "play": "Играть",
+        "greeting": "hshg,akgasckachs",
+        "project_descr": "Игровой проект jetgaming",
+        "contacts": "Контакты",
+        "help": "Помощь",
+        "copyright": "2022. Jetgaming - все права защищены",
+        "market": "Магазин",
+        "user_accept": "Пользовательское Соглашение",
+        "statistic": "Статистика",
+        "news": "Новости",
+        "enter": "Вход"
+    }
 }

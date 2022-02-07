@@ -2,29 +2,30 @@ import {
     AppBar, 
     Box, 
     Drawer, 
-    Divider, 
     IconButton, 
     Toolbar, 
-    InputBase
+    InputBase,
+    Menu,
+    MenuItem,
+    ListItemIcon,
+    ListItemText,
 } from '@mui/material'
 import Link from 'next/link'
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './layout.module.css'
-// import cn from 'classnames'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SearchIcon from '@mui/icons-material/Search';
-import Image from 'next/image'
 import { WellNavButton, NavButton } from '../navbutton/navbutton';
 import { lang } from '../../providers';
 import { useCallback, useEffect, useState } from 'react';
 import { DARK, LIGHT } from '../../src/theme';
 import { accountActions } from '../../store/main';
 import { useSelector, useDispatch } from 'react-redux';
-import { SOCIAL_MEDIA } from '../../config';
+import { API_URL, SOCIAL_MEDIA } from '../../config';
 import { Caption, SignBase } from '..';
-
+import useStyles from './rlayout.styles'
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -32,17 +33,39 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
   }));
+const icons_path = '/assets/langs/'
+const lang_icons = {
+    ru: [icons_path + 'ru.svg', 'Русский'],
+    en: [icons_path + 'en.svg', 'Английский'],
+    kz: [icons_path + 'kz.svg', 'Казахский']
+}
 
-export const RLayout = ({ children}) => {
+
+export const RLayout = ({ children, ... props}) => {
+    // console.log(props)
     const theme = useTheme();
     const dispatch = useDispatch();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [container, setContainer] = useState(undefined)
-    const { scheme } = useSelector(state => state.account);
+    const [languageMenuEl, setLanguageMenuEl] = useState(null);
+    const { scheme, language, user } = useSelector(state => state.account);
     const setScheme = useCallback((data) => dispatch(accountActions.setScheme(data)), [dispatch]);
+    const setUser = useCallback((data) => dispatch(accountActions.setUser(data)), [dispatch]);
+    const setLanguage = useCallback((data) => dispatch(accountActions.setLanguage(data)), [dispatch]);
     useEffect(() => {
         setContainer(window !== undefined ? () => document.body : undefined);
     })
+    useEffect(() => {
+        let mount = true;
+        fetch(`${API_URL}/user`)
+        .then(res => res.json())
+        .then(data => {
+            if(!mount) return;
+            setUser(data);
+        })
+        .catch(err => console.error(err));
+        return () => mount = false;
+    }, [])
     const drawer = (<>
         <DrawerHeader>
             <IconButton onClick={() => setDrawerOpen(p => !p)}>
@@ -100,47 +123,90 @@ export const RLayout = ({ children}) => {
             },
         },
     }));
+    const openLanguageMenu = (event) => {
+        let language_icon = event.currentTarget;
+        setLanguageMenuEl(language_icon);
+    }
+    const closeLanguageMenu = () => {
+        setLanguageMenuEl(null);
+    }
+    const getLanguageMenu = () => {
+        let languages = Object.keys(lang_icons);
+        languages = languages.filter(lang => lang !== language);
+        let r = languages.map((language_current) => (
+            <MenuItem key={language_current}
+            onClick={() => {
+                setLanguage(language_current)
+                //Вот этот костыль позволяет реакту увидеть, что язык изменён
+                setTimeout(() => setLanguage(language_current), 10);
+                closeLanguageMenu();
+            }}>
+                <ListItemIcon>
+                    <img src={lang_icons[language_current][0]} alt={language_current} />
+                </ListItemIcon>
+                <ListItemText>
+                    {lang_icons[language_current][1]}
+                </ListItemText>
+            </MenuItem>
+        ))
+        return r
+    }
     return(
         <>
             <Box>
-                <AppBar sx={{zIndex: (theme) => theme.zIndex.drawer+1, boxShadow: 'none',}} position='fixed'>
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            sx={{ mr: 2, display: { xs: 'block', sm: 'none' } }}
-                            onClick={() => setDrawerOpen(p => !p)}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Box sx={{ml: {xs:'calc(100% / 2 - 68px)', sm: 0}}}>
-                            <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} height={39} width={68} />
+                <AppBar sx={{zIndex: (theme) => theme.zIndex.drawer+1, boxShadow: 'none'}} position='fixed'>
+                    <Toolbar sx={{justifyContent: 'space-between'}}>
+                        <Box sx={{display: 'flex', alignItems: 'center'}}>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                sx={{ mr: 2, display: { xs: 'block', sm: 'none' } }}
+                                onClick={() => setDrawerOpen(p => !p)}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Box sx={{ml: {xs:'calc(100% / 2 - 68px)', sm: 0}}}>
+                                <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} height={39} width={68} />
+                            </Box>
+                            
+                            <Search sx={{display: { xs: 'none', sm: 'block' }}}>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Введите ник игрока..."
+                                    inputProps={{ 'aria-label': 'search' }}
+                                    />
+                            </Search>
+                            <Box sx={{display: { xs: 'none', sm: 'block' }}}>
+                                <IconButton href={SOCIAL_MEDIA.vk} target='_blank'>
+                                    <img src='/socialmedia/vk.svg' alt='vk' />
+                                </IconButton>
+                                <IconButton href={SOCIAL_MEDIA.telegram} target='_blank'>
+                                    <img src='/socialmedia/telegram.svg' alt='vk' />
+                                </IconButton>
+                                <IconButton href={SOCIAL_MEDIA.instagram} target='_blank'>
+                                    <img src='/socialmedia/instagram.svg' alt='vk' />
+                                </IconButton>
+                                <IconButton href={SOCIAL_MEDIA.discord} target='_blank'>
+                                    <img src='/socialmedia/discord.svg' alt='vk' />
+                                </IconButton>
+                            </Box>
                         </Box>
                         
-                        <Search sx={{display: { xs: 'none', sm: 'block' }}}>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Введите ник игрока..."
-                                inputProps={{ 'aria-label': 'search' }}
-                                />
-                        </Search>
-                        <Box sx={{display: { xs: 'none', sm: 'block' }}}>
-                            <IconButton href={SOCIAL_MEDIA.vk} target='_blank'>
-                                <img src='/socialmedia/vk.svg' alt='vk' />
+                        <Box sx={{flexGrow: 0}}>
+                            <IconButton
+                            onClick={openLanguageMenu}>
+                                <img src={lang_icons[language][0]} alt={language} />
                             </IconButton>
-                            <IconButton href={SOCIAL_MEDIA.telegram} target='_blank'>
-                                <img src='/socialmedia/telegram.svg' alt='vk' />
-                            </IconButton>
-                            <IconButton href={SOCIAL_MEDIA.instagram} target='_blank'>
-                                <img src='/socialmedia/instagram.svg' alt='vk' />
-                            </IconButton>
-                            <IconButton href={SOCIAL_MEDIA.discord} target='_blank'>
-                                <img src='/socialmedia/discord.svg' alt='vk' />
-                            </IconButton>
+                            <Menu
+                            onClose={closeLanguageMenu}
+                            anchorEl={languageMenuEl}
+                            open={Boolean(languageMenuEl)}>
+                                {getLanguageMenu()}
+                            </Menu>
                         </Box>
                         
                     </Toolbar>
@@ -165,8 +231,10 @@ export const RLayout = ({ children}) => {
                     {drawer}
                 </Drawer>
             </Box>
-            <div className={styles.root} id='171837'>
+            <div className={styles.root}>
                 {children}
+                
+                
                 <footer>
                     <SignBase className={styles.contacts}>
                         
@@ -190,7 +258,7 @@ export const RLayout = ({ children}) => {
                                 {lang.t('repeated.copyright')}
                             </Caption>
                         </Box>
-                        <Box sx={{display: { xs: 'none', sm: 'flex' }}} className={styles.contacts_column}>
+                        <Box sx={{display: { xs: 'none', sm: 'flex' }, alignItems: 'end'}} className={styles.contacts_column + ' ' + styles.contacts_column_r}>
                             <Link href='/user_accept'>
                                 <Caption isLink>
                                     {lang.t('repeated.user_accept')}
@@ -203,7 +271,7 @@ export const RLayout = ({ children}) => {
                             </Link>
                             
                         </Box>
-                        <Box sx={{ml: 2, display: { xs: 'block', sm: 'none !important' }}} className={styles.contacts_column}>
+                        <Box sx={{ml: 2, display: { xs: 'block', sm: 'none !important' }, alignItems: 'end'}} className={styles.contacts_column + ' ' + styles.contacts_column_r}>
                             <Link href='/contacts'>
                                 <Caption isLink>
                                     {lang.t('repeated.contacts')}

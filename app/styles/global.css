@@ -5,10 +5,13 @@
 a { 
     cursor: pointer;
 }
-
+h1, h2 {
+    margin: 0;
+}
 body {
     background-color: var(--background_root) !important;
     font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;
+    overflow-x: hidden;
 }
 .header {
     font-weight: bold;
@@ -17,4 +20,23 @@ body {
 .description {
     font-weight: normal;
     color: var(--text_description);
+}
+
+.swiper-button-next {
+    background-image: url(./next_b_swiper.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    right: 20px;
+}
+.swiper-button-prev {
+    background-image: url(./prev_b_swiper.svg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    left: 20px
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    content: '';
 }

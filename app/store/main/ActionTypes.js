@@ -1,4 +1,5 @@
 export const accountActionTypes = {
     SET_SCHEME: 'ACCOUNT.SET_SCHEME',
-    
+    SET_LANGUAGE: 'ACCOUNT.SET_LANGUAGE',
+    SET_USER: 'ACCOUNT.SET_USER',
 }

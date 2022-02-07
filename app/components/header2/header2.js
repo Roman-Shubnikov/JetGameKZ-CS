@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material';
 import clsx from 'clsx';
 
-import useStyles from './header.styles'
-export const Header = ({children, ...props}) => {
+import useStyles from './header.styles.js'
+export const Header2 = ({children, ...props}) => {
     const styles = useStyles();
     const classes = clsx(props.className, styles.root)
   return (

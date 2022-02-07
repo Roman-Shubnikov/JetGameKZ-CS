@@ -6,4 +6,6 @@ body[scheme="dark"] {
     --text: #FFFFFF;
     --text_description: #575757;
     --text_footer: #757575;
+    --cell_background: #1C1C1C;
+    --cell_position: #444444;
 }

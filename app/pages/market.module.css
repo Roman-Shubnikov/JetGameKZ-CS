@@ -1,0 +1,17 @@
+.promo_sign {
+    display: flex;
+    padding: 50px 70px;
+    min-width: 380px;
+}
+.promo_placeholder {
+    padding: 50px 70px;
+}
+.card {
+    padding: 36px;
+    margin-right: 48px;
+    border-radius: 19px;
+}
+.card:last-child {
+    margin-right: 0;
+    background-color: var(--red);
+}

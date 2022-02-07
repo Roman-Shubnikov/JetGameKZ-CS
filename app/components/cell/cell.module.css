@@ -1,0 +1,19 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+}
+.main {
+    display: flex;
+    align-items: center;
+    background-color: var(--cell_background);
+    border-radius: 14px;
+    padding: 20px 30px;
+}
+.position {
+    margin-right: 13px;
+    color: var(--cell_position);
+}
+.avatar {
+    margin-right: 19px;
+}
+

@@ -13,6 +13,7 @@
     justify-content: space-around;
     padding: 60px 40px !important;
     margin-top: 80px;
+    margin-bottom: 50px;
 }
 .contacts_column {
     flex-direction: column;
@@ -21,7 +22,7 @@
     color: var(--text_footer);
 
 }
-.contacts_column:last-child {
+.contacts_column_r {
     align-items: end;
 }
 .contacts_column:first-child {

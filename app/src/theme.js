@@ -13,10 +13,18 @@ export const theme_light = createTheme({
     error: {
       main: red.A400,
     },
+    whiteeeeq: {
+      main: '#FFFFFF',
+      contrastText: '#000',
+    },
     red: {
       main: '#FF0000',
       contrastText: '#fff',
     },
+    gray:{
+      main: '#FF0000',
+      contrastText: '#fff',
+    }
     
   },
   typography: {
@@ -54,6 +62,10 @@ export const theme_dark = createTheme({
       error: {
         main: red.A400,
       },
+      whiteeeeq: {
+        main: '#FFFFFF',
+        contrastText: '#000',
+      },
       red: {
         main: '#FF0000',
         contrastText: '#fff',
@@ -82,6 +94,13 @@ export const theme_dark = createTheme({
           },
         }
       },
+      MuiPopover: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: '#222222',
+          },
+        }
+      }
     }
   });
 
