@@ -26,6 +26,16 @@ const Home = () => {
     })
     return () => mount = false;
   }, [lang.locale])
+  useEffect(() => {
+    let mount = true;
+    fetch(`${API_URL}/tops?reg=${lang.locale}`)
+    .then(res => res.json())
+    .then(news => {
+      if(!mount) return;
+      setNews(news);
+    })
+    return () => mount = false;
+  }, [lang.locale])
   return (
     <div>
       <Paragraph
@@ -96,13 +106,34 @@ const Home = () => {
       </Paragraph>
       <Paragraph
       head={<Header>{lang.t('repeated.statistics_player')}</Header>}>
-        <SignBase className={styles['statistics-player']}>
-          <Cell
-          position={1}
-          description='aads'>
-            hjdhda uyhahujasd
-          </Cell>
-          <div className={styles['statistics-player_sep']}></div>
+        <SignBase className={styles['statistics-player']}
+        sx={{flexDirection: {xs: 'column', lg: 'row'}}}>
+          <Box className={styles['statistics-player_rank']}>
+            <Header mb={4} mt={2}>{lang.t('pages_content.top_rank')}</Header>
+            {Array(6).fill().map((x,i) => 
+              <Cell
+              className={styles['statistics-player_cell']}
+              position={i}
+              description='aads'
+              after={<img style={{marginLeft: 15}} src='/assets/rank_icons/1.png' alt='rank' />}>
+                hjdhda uyhahujasd
+              </Cell>
+            )}
+          </Box>
+          <Box className={styles['statistics-player_sep']}
+          sx={{display: {xs: 'none', lg: 'block'}}}></Box>
+          <Box className={styles['statistics-player_rank']}>
+            <Header mb={4} mt={2}>{lang.t('pages_content.top_exp')}</Header>
+            {Array(6).fill().map((x,i) => 
+              <Cell
+              className={styles['statistics-player_cell']}
+              position={i}
+              description='aads'
+              after={<Header ml={1}>1212 JETS</Header>}>
+                hjdhda uyhahujasd
+              </Cell>
+            )}
+          </Box>
         </SignBase>
       </Paragraph>
     </div>

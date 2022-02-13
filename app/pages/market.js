@@ -1,9 +1,11 @@
-import { Button } from '@mui/material';
-import { Box } from '@mui/system';
+import { Button, Rating, Skeleton, TextField } from '@mui/material';
+import { Box, color } from '@mui/system';
+import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import {
   Caption,
+  FeedbackCell,
   Header,
   Header2,
   Paragraph,
@@ -16,8 +18,9 @@ import styles from './market.module.css'
 
 
 
-const Home = props => {
+const Market = props => {
   const [products, setProducts] = useState(null);
+  const [send_rating_value, setSendRating] = useState(0);
   useEffect(() => {
     let mount = true;
     fetch(`${API_URL}/market_items?reg=${lang.locale}`)
@@ -39,23 +42,30 @@ const Home = props => {
             {lang.t('page_names.market_descr')}
           </Caption></>}>
         <SignBase className={styles.promo_sign}>
-          {products ? products.lenght === 0 ? 
+          {products ? products.length === 0 ? 
           <div className={styles.promo_placeholder}>
-            <Header>{console.log('assfd')}
+            <Header>
               {lang.t('placeholders.empty_region')}
             </Header>
           </div> : products.map((val, i) => 
           <Box className={styles.card}
           key={val.id}>
-            <Caption>
-              {lang.t('repeated.subscription')}
-            </Caption>
-            <h1 style={{fontSize: 64, lineHeight: 0.9, marginBottom: 40}}>
-              {val.name}
-            </h1>
+            <Box sx={{position: 'relative'}}>
+              <Caption>
+                {lang.t('repeated.subscription')}
+              </Caption>
+              <h1 style={{fontSize: 64, lineHeight: 0.9, marginBottom: 40}}>
+                {val.name}
+              </h1>
+              {val.hot ? <Box sx={{backgroundColor: "#FF6161", position: 'absolute', right: 0, top: 0, padding: '8px 10px', borderRadius: 2}}>
+                <img src='/assets/fire.svg' alt='fire' />
+              </Box>: null}
+            </Box>
+            
             <Box mb={2}>
               {val.benefits.map((benefit, ind) => 
-              <Caption>
+              <Caption
+              key={benefit.id}>
                 {benefit.text}
               </Caption>)}
             </Box>
@@ -68,11 +78,88 @@ const Home = props => {
               {lang.t('repeated.purchase')}
             </Button>
           </Box>
-          ) : null}
+          ) : 
+            Array(3).fill().map((skull, i) => <Skeleton key={i} width={230} height={340} className={styles.card_placeholder} />)}
         </SignBase>
+      </Paragraph>
+      <Paragraph
+      head={<>
+        <Header>{lang.t('repeated.feedback')}</Header>
+        <Caption mt={1.5} mb={4}>
+          {lang.t('pages_content.donut_feedback')}
+        </Caption></>}>
+          <SignBase style={{justifyContent: 'center', padding: 20}}>
+          <Box className={styles.feedback_box_main}>
+              <Box className={styles.feedback_box_users}>
+                <FeedbackCell
+                className={styles.feedback_card}
+                rating={4}
+                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
+                  RomanDev
+                </FeedbackCell>
+                <FeedbackCell
+                className={styles.feedback_card}
+                rating={4}
+                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
+                  RomanDev
+                </FeedbackCell>
+                <FeedbackCell
+                className={styles.feedback_card}
+                rating={4}
+                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
+                  RomanDev
+                </FeedbackCell>
+                <FeedbackCell
+                className={styles.feedback_card}
+                rating={4}
+                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
+                  RomanDev
+                </FeedbackCell>
+              </Box>
+              <Box className={styles.feedback_box_send}>
+                
+                <Header>{lang.t('repeated.give_feedback')}</Header>
+                <Caption mt={1.5} mb={4}>
+                  {lang.t('pages_content.give_feedback_descr')}
+                </Caption>
+                <Box className={styles.feedback_box_send_main}>
+                  {/* <TextField label={lang.t('pages_content.give_name')} 
+                  variant="outlined" 
+                  sx={{width: '100%', mb: 2, borderRadius: '12px', '& .MuiOutlinedInput-root': { backgroundColor: 'var(--inputs_background)' }, '& .MuiInputLabel-root': {color: 'var(--text_description)'}}} /> */}
+                  <TextField label={lang.t('pages_content.give_text')}
+                  variant="outlined"
+                  multiline
+                  rows={6}
+                  sx={{width: '100%', borderRadius: '12px', mb: 2, '& .MuiOutlinedInput-root': { backgroundColor: 'var(--inputs_background)' }, '& .MuiInputLabel-root': {color: 'var(--text_description)'}}} />
+                  <Box sx={{backgroundColor: 'var(--inputs_background)', 
+                  borderRadius: '12px',
+                  mb: 4,
+                  padding: 2,
+                  display: 'flex',
+                  justifyContent: 'center'}}>
+                    <Rating 
+                    sx={{
+                      '& .MuiRating-icon': {
+                          color: '#faaf00'
+                      },
+                      
+                    }} 
+                    value={send_rating_value} 
+                    onChange={(e, rating) => setSendRating(rating)} />
+                  </Box>
+                  <Button sx={{width: '100%'}} variant='contained'>
+                    {lang.t('repeated.send')}
+                  </Button>
+                </Box>
+                
+
+                
+              </Box>
+            </Box>
+          </SignBase>
       </Paragraph>
     </div>
   )
 }
-Home.Layout = RLayout;
-export default Home;
+Market.Layout = RLayout;
+export default Market;

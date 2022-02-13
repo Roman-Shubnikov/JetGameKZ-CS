@@ -7,24 +7,24 @@ export const Cell = ({children, photo, position, description, after, ...props}) 
     const classes = clsx(props.className, styles.root)
   return (
       <Box {...props} className={classes}>
-          <Box className={styles.main}>
-            <Header className={styles.position}>{position}</Header>
-            <Avatar 
-            sx={{width: 52, height: 52}}
-            className={styles.avatar}
-            alt='ava' src={photo} />
-            <Box>
-                <Header2>
-                    {children}
-                </Header2>
-                <Caption color='var(--text_description)'>
-                    {description}
-                </Caption>
+            <Box className={styles.main}>
+                <Header className={styles.position}>{position}</Header>
+                <Avatar 
+                sx={{width: 52, height: 52}}
+                className={styles.avatar}
+                alt='ava' src={photo} />
+                <Box>
+                    <Header2>
+                        {children}
+                    </Header2>
+                    <Caption color='var(--text_description)' textAlign='start'>
+                        {description}
+                    </Caption>
+                </Box>
             </Box>
-          </Box>
-          <Box>
-              {after}
-          </Box>
+        <Box>
+                {after}
+        </Box>
           
       </Box>
   )

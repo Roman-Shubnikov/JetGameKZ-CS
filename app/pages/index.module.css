@@ -67,15 +67,35 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.64))
 }
 .statistics-player {
-    height: 500px;
-    align-items: center;
+    min-width: 390px;
+    justify-content: center;
+}
+@media (min-width: 1200px) {
+    .statistics-player {
+        justify-content: space-around;
+    }
+    .statistics-player_rank {
+        width: 35%;
+    }
+}
+.statistics-player_rank {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.statistics-player_cell {
+    margin: 8px 0;
 }
 .statistics-player_sep {
-    height: 40%;
+    height: 300px;
     width: 9px;
     background-color: var(--red);
     border-radius: 9px;
     box-shadow: 0px 0px 60px rgba(255, 0, 0, 0.25);
+    align-self: center;
+    position: absolute;
 }
 
 @media screen and (max-width: 1350px) {

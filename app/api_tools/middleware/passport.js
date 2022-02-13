@@ -34,3 +34,7 @@ export const passport_middleware = nextConnect()
         req.region = region;
         next()
     })
+    .use(async (req, res, next) => {
+        req.is_auth = Boolean(await req.user);
+        next();
+    })

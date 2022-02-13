@@ -2,16 +2,52 @@
     display: flex;
     padding: 50px 70px;
     min-width: 380px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .promo_placeholder {
     padding: 50px 70px;
+    margin: 0 auto;
 }
 .card {
     padding: 36px;
+    border-radius: 19px;
+    background-color: var(--red);
+    margin: 24px 24px 24px 24px;
+}
+.card_placeholder {
+    padding: 36px;
     margin-right: 48px;
     border-radius: 19px;
+    transform: scale(1, 1);
 }
-.card:last-child {
-    margin-right: 0;
-    background-color: var(--red);
+.feedback_box_main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.feedback_box_users {
+    display: flex;
+    flex-wrap: wrap;
+}
+.feedback_card {
+    margin: 10px 50px;
+    max-width: 200px;
+}
+
+.feedback_box_send {
+    padding: 50px;
+    padding-bottom: 0;
+}
+.feedback_box_send_main {
+    background-color: var(--cell_background);
+    padding: 40px 20px;
+    border-radius: 19px;
+    padding-bottom: 20px;
+}
+.feedback_box_send_input {
+    background-color: #131313;
+    border-radius: 12px;
+    padding: 2px;
 }

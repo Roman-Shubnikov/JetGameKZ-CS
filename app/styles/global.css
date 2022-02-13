@@ -9,9 +9,13 @@ h1, h2 {
     margin: 0;
 }
 body {
+    --font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;
     background-color: var(--background_root) !important;
-    font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;
+    font-family: var(--font-family) !important;
     overflow-x: hidden;
+}
+label {
+    font-family: var(--font-family) !important;
 }
 .header {
     font-weight: bold;
