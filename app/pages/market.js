@@ -3,6 +3,7 @@ import { Box, color } from '@mui/system';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Caption,
   FeedbackCell,
@@ -13,24 +14,51 @@ import {
 } from '../components';
 import { API_URL } from '../config';
 import { lang } from '../providers';
-import { getLanguage } from '../src';
 import styles from './market.module.css'
 
-
+export const getServerSideProps = async (context) => {
+  let lang = context.req.cookies.language;
+  let res = await fetch(`${API_URL}/market_items?reg=${lang}`);
+  let products = await res.json();
+  return {
+    props: {
+      products,
+    }
+  }
+}
 
 const Market = props => {
-  const [products, setProducts] = useState(null);
+  const {products} = props;
+  const { user } = useSelector(state => state.account);
+  const [feedback, setFeedback] = useState(null);
   const [send_rating_value, setSendRating] = useState(0);
   useEffect(() => {
-    let mount = true;
-    fetch(`${API_URL}/market_items?reg=${lang.locale}`)
-    .then(res => res.json())
-    .then(products => {
-      if(!mount) return;
-      setProducts(products)
-    })
-    return () => mount = false;
-  }, [lang.locale])
+    if(user) {
+      fetch(`${API_URL}/feedback`)
+      .then(res => res.json())
+      .then(feedback => {
+        setFeedback(feedback);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+    
+  }, [])
+  const getFeedback = () => {
+    if(!user) return <Header>{lang.t('pages_content.auth_notif')}</Header>;
+    if(!feedback) return Array(3).fill().map((skull, i) => <Skeleton key={i} width={300} height={300} className={styles.feedback_card} />);
+    if(feedback.length === 0) return <Header>Отзывов нет но такого быть не может</Header>;
+    return (feedback.feedback.map((val, i) => (
+      <FeedbackCell
+      key={val.id}
+      className={styles.feedback_card}
+      rating={4}
+      text={val.text}>
+        {val.name}
+      </FeedbackCell>
+      )))
+  }
   return (
     <div>
       <Paragraph
@@ -42,7 +70,7 @@ const Market = props => {
             {lang.t('page_names.market_descr')}
           </Caption></>}>
         <SignBase className={styles.promo_sign}>
-          {products ? products.length === 0 ? 
+          {products.length === 0 ? 
           <div className={styles.promo_placeholder}>
             <Header>
               {lang.t('placeholders.empty_region')}
@@ -57,9 +85,9 @@ const Market = props => {
               <h1 style={{fontSize: 64, lineHeight: 0.9, marginBottom: 40}}>
                 {val.name}
               </h1>
-              {val.hot ? <Box sx={{backgroundColor: "#FF6161", position: 'absolute', right: 0, top: 0, padding: '8px 10px', borderRadius: 2}}>
+              {val.hot && <Box sx={{backgroundColor: "#FF6161", position: 'absolute', right: 0, top: 0, padding: '8px 10px', borderRadius: 2}}>
                 <img src='/assets/fire.svg' alt='fire' />
-              </Box>: null}
+              </Box>}
             </Box>
             
             <Box mb={2}>
@@ -74,12 +102,11 @@ const Market = props => {
                 {val.price} {val.currency_name} /{lang.t('repeated.month')}
               </Header2>
             </Box>
-            <Button sx={{ width: '100%' }} size='large' variant='contained' sx={{color: '#000', background: '#fff'}}>
+            <Button size='large' variant='contained' sx={{width: '100%', color: '#000', background: '#fff'}}>
               {lang.t('repeated.purchase')}
             </Button>
           </Box>
-          ) : 
-            Array(3).fill().map((skull, i) => <Skeleton key={i} width={230} height={340} className={styles.card_placeholder} />)}
+          )}
         </SignBase>
       </Paragraph>
       <Paragraph
@@ -91,30 +118,7 @@ const Market = props => {
           <SignBase style={{justifyContent: 'center', padding: 20}}>
           <Box className={styles.feedback_box_main}>
               <Box className={styles.feedback_box_users}>
-                <FeedbackCell
-                className={styles.feedback_card}
-                rating={4}
-                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
-                  RomanDev
-                </FeedbackCell>
-                <FeedbackCell
-                className={styles.feedback_card}
-                rating={4}
-                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
-                  RomanDev
-                </FeedbackCell>
-                <FeedbackCell
-                className={styles.feedback_card}
-                rating={4}
-                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
-                  RomanDev
-                </FeedbackCell>
-                <FeedbackCell
-                className={styles.feedback_card}
-                rating={4}
-                text='adsafdsafsafsdfdsfdsffsdafasasdasdcccccccccccccccccccccccccccccsdfsda'>
-                  RomanDev
-                </FeedbackCell>
+                {getFeedback()}
               </Box>
               <Box className={styles.feedback_box_send}>
                 

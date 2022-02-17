@@ -1,7 +1,7 @@
 
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Cookies from 'js-cookie'
@@ -34,6 +34,7 @@ const generateClassName = createGenerateClassName({
 });
 const Noop = ({ children }) => <>{children}</>
 const App = ({ Component, pageProps }) => {
+    const router = useRouter();
     const Layout = Component.Layout || Noop;
     const dispatch = useDispatch();
     const [theme, setTheme] = useState('light')
@@ -62,9 +63,11 @@ const App = ({ Component, pageProps }) => {
         if (language !== language_cookie && init.current) {
             Cookies.set('language', language, { expires: 300 });
             language_cookie = language;
+            router.reload();
         }
         lang.changeLanguage(language_cookie)
         setLanguage(language_cookie);
+        
     }, [language])
 
     useEffect(() => {

@@ -1,6 +1,8 @@
 import passport from 'passport';
 import Steam from 'passport-steam';
 import { userGetBySteamId } from '.';
+import SteamID from 'steamid';
+
 
 passport.use(new Steam({
     returnURL: 'http://localhost:3000/api/auth/steam/return',
@@ -12,11 +14,13 @@ passport.use(new Steam({
 
 
 passport.serializeUser((user, done) => {
-    done(null, parseInt(user.id)); 
+    let sid = new SteamID(user.id).getSteam2RenderedID(true);
+    done(null, sid); 
 });
 
 passport.deserializeUser((id, done) => {
-    userGetBySteamId(id)
+    let sid = new SteamID(id).getSteam2RenderedID(true);
+    userGetBySteamId(sid)
     .then(data => {
         done(null, data)
     })

@@ -9,7 +9,7 @@ const Error404 = () => {
       <div className={styles.root}>
         <h1 className={styles.red}>404</h1>
         <Box sx={{fontSize: 20, textAlign: 'center', mb: 10}}>{lang.t('nav.404')}</Box>
-        <Link href='/'>
+        <Link href='/' passHref>
             <Button size='large' variant='contained'>
                 {lang.t('nav.main')}
             </Button>

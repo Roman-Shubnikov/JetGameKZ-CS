@@ -5,7 +5,8 @@
     "dev": "next dev",
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -44,8 +45,13 @@
     "react-thunk": "^1.0.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
+    "steamid": "^2.0.0",
     "swiper": "^7.4.1",
     "tls": "0.0.1",
     "translation-check": "^1.0.2"
+  },
+  "devDependencies": {
+    "eslint": "8.9.0",
+    "eslint-config-next": "12.0.10"
   }
 }

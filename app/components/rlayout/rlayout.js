@@ -9,6 +9,8 @@ import {
     MenuItem,
     ListItemIcon,
     ListItemText,
+    Avatar,
+    Button,
 } from '@mui/material'
 import Link from 'next/link'
 import { styled, useTheme, alpha } from '@mui/material/styles';
@@ -24,7 +26,7 @@ import { DARK, LIGHT } from '../../src/theme';
 import { accountActions } from '../../store/main';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL, SOCIAL_MEDIA } from '../../config';
-import { Caption, SignBase } from '..';
+import { Caption, Header2, SignBase } from '..';
 import useStyles from './rlayout.styles'
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -42,7 +44,6 @@ const lang_icons = {
 
 
 export const RLayout = ({ children, ... props}) => {
-    // console.log(props)
     const theme = useTheme();
     const dispatch = useDispatch();
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -196,8 +197,9 @@ export const RLayout = ({ children, ... props}) => {
                             </Box>
                         </Box>
                         
-                        <Box sx={{flexGrow: 0}}>
+                        <Box sx={{flexGrow: 0, display: 'flex', alignItems: 'center'}}>
                             <IconButton
+                            sx={{mr: 2}}
                             onClick={openLanguageMenu}>
                                 <img src={lang_icons[language][0]} alt={language} />
                             </IconButton>
@@ -207,6 +209,24 @@ export const RLayout = ({ children, ... props}) => {
                             open={Boolean(languageMenuEl)}>
                                 {getLanguageMenu()}
                             </Menu>
+                            {user ? <Box sx={{display: {xs:'none', sm: 'flex'}, 
+                            alignItems: 'center'}}>
+                                <Box sx={{mr: 2}}>
+                                    <Header2 color='var(--red)'>
+                                        {user.name}
+                                    </Header2>
+                                    <Caption>
+                                        {lang.t('repeated.balance')}: {user.balance}
+                                    </Caption>
+                                </Box>
+                                <Avatar src={user.avatar} alt='avatar' />
+                            </Box> :
+                            <Link href='/login' passHref>
+                                <Button variant='contained' size='small' sx={{height: 38}}>
+                                    {lang.t('repeated.enter')}
+                                </Button>
+                            </Link>}
+                            
                         </Box>
                         
                     </Toolbar>

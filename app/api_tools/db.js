@@ -16,6 +16,6 @@ export const dbGet = async (sql, placeholders=[]) => {
     return res
 }
 export const dbGetCS = async (sql, placeholders=[]) => {
-    let res = await dbGet_base(CONNECT_DB, sql, placeholders)
+    let res = await dbGet_base(CONNECT_DB_CS, sql, placeholders)
     return res
 }

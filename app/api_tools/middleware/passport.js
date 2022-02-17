@@ -2,7 +2,7 @@ import nextConnect from 'next-connect'
 import steamPassport from '../pasport-steam'
 import exprSession from 'cookie-session'
 import rateLimit from 'express-rate-limit'
-import { updateLastLogin } from '..'
+import { LANGUAGES, updateLastLogin } from '..'
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
 	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
@@ -29,8 +29,10 @@ export const passport_middleware = nextConnect()
     })
     .use(async (req, res, next) => {
         let region = 'ru';
-        let query = req.query;
-        if ('reg' in query) region = query.reg;
+        let region_cookie = req.cookies.language;
+        let region_query = req.query.reg;
+        if(region_query && LANGUAGES.indexOf(region_query) !== -1) region = region_query;
+        if(region_cookie && LANGUAGES.indexOf(region_cookie) !== -1) region = region_cookie;
         req.region = region;
         next()
     })
@@ -38,3 +40,8 @@ export const passport_middleware = nextConnect()
         req.is_auth = Boolean(await req.user);
         next();
     })
+
+export const checkAuth = (req, res, next) => {
+    if(!req.is_auth) return res.status(401).send('UnAuthorized');
+    next();
+}
