@@ -3,7 +3,7 @@ import styles from './navbutton.module.css'
 import Link from 'next/link'
 export const WellNavButton = ({icon, href, ...props}) => {
     return (
-        <Link href={href}>
+        <Link href={href} passHref>
             <NavButton icon={icon} {...props} />
         </Link>
     )
@@ -11,7 +11,9 @@ export const WellNavButton = ({icon, href, ...props}) => {
 
 export const NavButton = ({icon, ...props}) => {
     return (
-        <div {...props} className={styles.root}>
+        <div 
+        {...props} 
+        className={styles.root}>
             <img src={icon} alt='icon' width={24} height={24} />
         </div>
     )

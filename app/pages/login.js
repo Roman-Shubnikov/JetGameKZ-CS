@@ -25,7 +25,7 @@ const Card = ({icon, head, descr, enter_link}) => {
                     </Caption>
                 </Box>
                 <Box>
-                    <Link href={enter_link}>
+                    <Link href={enter_link} passHref>
                         <Button size='large' variant='contained' sx={{width:200}}>
                             {lang.t('repeated.enter')}
                         </Button>

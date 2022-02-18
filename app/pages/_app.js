@@ -60,7 +60,7 @@ const App = ({ Component, pageProps }) => {
 
     useEffect(() => {
         let language_cookie = Cookies.get('language');
-        if (language !== language_cookie && init.current) {
+        if ((language !== language_cookie && init.current) || language_cookie === undefined) {
             Cookies.set('language', language, { expires: 300 });
             language_cookie = language;
             router.reload();

@@ -143,7 +143,7 @@ const Home = () => {
             <Header mb={4} mt={2}>{lang.t('pages_content.top_rank')}</Header>
             {tops && tops.top_rank.map((x,i) => 
               <Cell
-              key={x.id}
+              key={x.steam_id}
               className={styles['statistics-player_cell']}
               position={i +1}
               description={'КД: ' + x.kd}
@@ -158,7 +158,7 @@ const Home = () => {
             <Header mb={4} mt={2}>{lang.t('pages_content.top_exp')}</Header>
               {tops && tops.top_value.map((x,i) => 
               <Cell
-              key={x.id}
+              key={x.steam_id}
               className={styles['statistics-player_cell']}
               position={i +1}
               after={<Header ml={1}>{x.value} JETS</Header>}>

@@ -43,7 +43,34 @@ const lang_icons = {
 }
 
 
+
 export const RLayout = ({ children, ... props}) => {
+    const links_contacts = (<>
+        <Link href='/contacts' passHref>
+            <Caption isLink>
+                {lang.t('repeated.contacts')}
+            </Caption>
+        </Link>
+        <Link href='/help' passHref>
+            <Caption isLink>
+                {lang.t('repeated.help')}
+            </Caption>
+        </Link>
+        </>
+    );
+    const links_market = (<>
+        <Link href='/user_accept' passHref>
+            <Caption isLink>
+                {lang.t('repeated.user_accept')}
+            </Caption>
+        </Link>
+        <Link href='/market' passHref>
+            <Caption isLink>
+                {lang.t('repeated.market')}
+            </Caption>
+        </Link>
+        </>
+    )
     const theme = useTheme();
     const dispatch = useDispatch();
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -58,13 +85,20 @@ export const RLayout = ({ children, ... props}) => {
     })
     useEffect(() => {
         let mount = true;
+        try{
         fetch(`${API_URL}/user`)
+        .then(res => {if(res.ok) res
+            else {
+                throw new Error(res.status)}})
         .then(res => res.json())
         .then(data => {
             if(!mount) return;
             setUser(data);
         })
         .catch(err => console.error(err));
+        } catch(err) {
+            
+        }
         return () => mount = false;
     }, [])
     const drawer = (<>
@@ -169,7 +203,7 @@ export const RLayout = ({ children, ... props}) => {
                                 <MenuIcon />
                             </IconButton>
                             <Box sx={{ml: {xs:'calc(100% / 2 - 68px)', sm: 0}}}>
-                                <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} height={39} width={68} />
+                                <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} alt="JetGame" height={39} width={68} />
                             </Box>
                             
                             <Search sx={{display: { xs: 'none', sm: 'block' }}}>
@@ -259,59 +293,23 @@ export const RLayout = ({ children, ... props}) => {
                     <SignBase className={styles.contacts}>
                         
                         <Box sx={{display: { xs: 'none', sm: 'flex' }}} className={styles.contacts_column} alignItems='left'>
-                            <Link href='/contacts'>
-                                <Caption isLink>
-                                    {lang.t('repeated.contacts')}
-                                </Caption>
-                            </Link>
-                            <Link href='/help'>
-                                <Caption isLink>
-                                    {lang.t('repeated.help')}
-                                </Caption>
-                            </Link>
+                            {links_contacts}
                         </Box>
 
                         <Box sx={{display: 'flex'}} className={styles.contacts_column}>
-                            <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} height={39} width={68}
+                            <img src={scheme === LIGHT ? '/logo_wt.svg' : '/logo.svg'} alt='JetGame' height={39} width={68}
                             style={{marginBottom: 10}} />
                             <Caption>
                                 {lang.t('repeated.copyright')}
                             </Caption>
                         </Box>
                         <Box sx={{display: { xs: 'none', sm: 'flex' }, alignItems: 'end'}} className={styles.contacts_column + ' ' + styles.contacts_column_r}>
-                            <Link href='/user_accept'>
-                                <Caption isLink>
-                                    {lang.t('repeated.user_accept')}
-                                </Caption>
-                            </Link>
-                            <Link href='/market'>
-                                <Caption isLink>
-                                    {lang.t('repeated.market')}
-                                </Caption>
-                            </Link>
+                            {links_market}
                             
                         </Box>
                         <Box sx={{ml: 2, display: { xs: 'block', sm: 'none !important' }, alignItems: 'end'}} className={styles.contacts_column + ' ' + styles.contacts_column_r}>
-                            <Link href='/contacts'>
-                                <Caption isLink>
-                                    {lang.t('repeated.contacts')}
-                                </Caption>
-                            </Link>
-                            <Link href='/help'>
-                                <Caption isLink>
-                                    {lang.t('repeated.help')}
-                                </Caption>
-                            </Link>
-                            <Link href='/user_accept'>
-                                <Caption isLink>
-                                    {lang.t('repeated.user_accept')}
-                                </Caption>
-                            </Link>
-                            <Link href='/market'>
-                                <Caption isLink>
-                                    {lang.t('repeated.market')}
-                                </Caption>
-                            </Link>
+                            {links_contacts}
+                            {links_market}
                             
                         </Box>
                     </SignBase>
