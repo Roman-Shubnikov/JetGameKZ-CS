@@ -85,20 +85,17 @@ export const RLayout = ({ children, ... props}) => {
     })
     useEffect(() => {
         let mount = true;
-        try{
         fetch(`${API_URL}/user`)
-        .then(res => {if(res.ok) res
-            else {
-                throw new Error(res.status)}})
+        .then(res => res.ok ? res : Promise.reject(res))
         .then(res => res.json())
         .then(data => {
             if(!mount) return;
             setUser(data);
         })
-        .catch(err => console.error(err));
-        } catch(err) {
+        .catch(err => 
             
-        }
+            console.log()
+            );
         return () => mount = false;
     }, [])
     const drawer = (<>

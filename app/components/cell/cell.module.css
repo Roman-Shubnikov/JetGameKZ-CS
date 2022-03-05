@@ -10,10 +10,6 @@
     display: flex;
     align-items: center;
 }
-.position {
-    margin-right: 12px;
-    color: var(--cell_position);
-}
 .avatar {
     margin-right: 19px;
 }

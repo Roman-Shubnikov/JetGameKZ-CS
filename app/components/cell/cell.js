@@ -8,7 +8,7 @@ export const Cell = ({children, photo, position, description, after, ...props}) 
   return (
       <Box {...props} className={classes}>
             <Box className={styles.main}>
-                <Header className={styles.position}>{position}</Header>
+                <Header sx={{mr: 1.5}} color="var(--cell_position)">{position}</Header>
                 <Avatar 
                 sx={{width: 52, height: 52}}
                 className={styles.avatar}

@@ -43,13 +43,13 @@
 .news_swiper {
     /* display: flex; */
     height: 383px;
-    background-color: black;
+    /* background-color: ; */
 }
 .news_card {
     padding: 5px 10px;
     width: 255px;
     background-color: blue;
-    border-radius: 16px;
+    border-radius: 23px;
     box-sizing: border-box;
 }
 .news_card_content {
@@ -60,6 +60,7 @@
 }
 .news_card_g {
     position: absolute;
+    border-radius: 23px;
     width: 100%;
     height: 100%;
     top: 0;

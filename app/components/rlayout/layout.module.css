@@ -14,7 +14,7 @@
     justify-content: space-around;
     padding: 60px 40px !important;
     margin-top: 80px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .contacts_column {
     flex-direction: column;

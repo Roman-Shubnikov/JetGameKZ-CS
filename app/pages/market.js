@@ -32,6 +32,25 @@ const Market = props => {
   const { user } = useSelector(state => state.account);
   const [feedback, setFeedback] = useState(null);
   const [send_rating_value, setSendRating] = useState(0);
+  const [feedback_text, setFeedbackText] = useState('');
+
+
+  const sendFeedback = () => {
+    fetch(`${API_URL}/feedback`, {
+      method: 'POST',
+      headers: {"Content-type": "application/json; charset=UTF-8"},
+      body: JSON.stringify({
+        'text': feedback_text,
+        'rating': send_rating_value
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      setFeedbackText(lang.t('messages.reload'))
+    })
+    .catch(err => {})
+  }
+
   useEffect(() => {
     if(user) {
       fetch(`${API_URL}/feedback`)
@@ -44,7 +63,7 @@ const Market = props => {
       })
     }
     
-  }, [])
+  }, [user])
   const getFeedback = () => {
     if(!user) return <Header>{lang.t('pages_content.auth_notif')}</Header>;
     if(!feedback) return Array(3).fill().map((skull, i) => <Skeleton key={i} width={300} height={300} className={styles.feedback_card} />);
@@ -127,14 +146,16 @@ const Market = props => {
                   {lang.t('pages_content.give_feedback_descr')}
                 </Caption>
                 <Box className={styles.feedback_box_send_main}>
-                  {/* <TextField label={lang.t('pages_content.give_name')} 
-                  variant="outlined" 
-                  sx={{width: '100%', mb: 2, borderRadius: '12px', '& .MuiOutlinedInput-root': { backgroundColor: 'var(--inputs_background)' }, '& .MuiInputLabel-root': {color: 'var(--text_description)'}}} /> */}
                   <TextField label={lang.t('pages_content.give_text')}
                   variant="outlined"
                   multiline
                   rows={6}
-                  sx={{width: '100%', borderRadius: '12px', mb: 2, '& .MuiOutlinedInput-root': { backgroundColor: 'var(--inputs_background)' }, '& .MuiInputLabel-root': {color: 'var(--text_description)'}}} />
+                  value={feedback_text}
+                  onChange={e => setFeedbackText(e.target.value)}
+                  sx={{width: '100%', borderRadius: '12px', mb: 2, 
+                    '& .MuiOutlinedInput-root': 
+                    { backgroundColor: 'var(--inputs_background)' }, 
+                    '& .MuiInputLabel-root': {color: 'var(--text_description)'}}} />
                   <Box sx={{backgroundColor: 'var(--inputs_background)', 
                   borderRadius: '12px',
                   mb: 4,
@@ -151,7 +172,8 @@ const Market = props => {
                     value={send_rating_value} 
                     onChange={(e, rating) => setSendRating(rating)} />
                   </Box>
-                  <Button sx={{width: '100%'}} variant='contained'>
+                  <Button sx={{width: '100%'}} variant='contained'
+                  onClick={sendFeedback}>
                     {lang.t('repeated.send')}
                   </Button>
                 </Box>

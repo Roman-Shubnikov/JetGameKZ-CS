@@ -29,6 +29,7 @@
 }
 .feedback_box_users {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 .feedback_card {
@@ -41,7 +42,7 @@
     padding-bottom: 0;
 }
 .feedback_box_send_main {
-    background-color: var(--cell_background);
+    background-color: var(--nested_card_background);
     padding: 40px 20px;
     border-radius: 19px;
     padding-bottom: 20px;

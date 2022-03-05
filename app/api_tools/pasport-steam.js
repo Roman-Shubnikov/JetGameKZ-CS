@@ -2,12 +2,12 @@ import passport from 'passport';
 import Steam from 'passport-steam';
 import { userGetBySteamId } from '.';
 import SteamID from 'steamid';
-
+import { STEAM_AUTH } from './config'
 
 passport.use(new Steam({
-    returnURL: 'http://localhost:3000/api/auth/steam/return',
-    realm: 'http://localhost:3000/',
-    apiKey: 'D5CEA1BABC84D3104D3197FDCB1F1A8A'
+    returnURL: STEAM_AUTH.redirect,
+    realm: STEAM_AUTH.host,
+    apiKey: STEAM_AUTH.token
 }, (link, profile, cb) => {
     return cb(null, profile)
 }))

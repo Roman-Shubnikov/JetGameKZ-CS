@@ -40,6 +40,9 @@ label {
     background-position: center;
     left: 20px
 }
+.swiper-wrapper {
+    overflow-y: visible;
+}
 .swiper-button-next::after,
 .swiper-button-prev::after {
     content: '';

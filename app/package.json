@@ -26,6 +26,7 @@
     "cross-env": "^7.0.3",
     "express-rate-limit": "^6.2.0",
     "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
     "fs": "0.0.1-security",
     "i18n-js": "^3.8.0",
     "i18next": "^21.6.10",
@@ -48,7 +49,8 @@
     "steamid": "^2.0.0",
     "swiper": "^7.4.1",
     "tls": "0.0.1",
-    "translation-check": "^1.0.2"
+    "translation-check": "^1.0.2",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "eslint": "8.9.0",
