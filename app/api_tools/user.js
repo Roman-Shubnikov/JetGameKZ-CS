@@ -17,10 +17,10 @@ export const updateLastLogin = async (id, time_login=null) => {
     return res;
 }
 
-export const createUser = async (steam_id, username, avatar, region) => {
+export const createUser = async (steam_id, username, avatar) => {
     let currTime = parseInt(new Date().getTime() / 1000)
 
-    let res = await dbGet('INSERT IGNORE INTO users (name,steam_id,avatar,region,reg_date,last_login) VALUES (?,?,?,?,?,?)', [username, steam_id, avatar, region, currTime, currTime])
+    let res = await dbGet('INSERT IGNORE INTO users (name,steam_id,avatar,reg_date,last_login) VALUES (?,?,?,?,?)', [username, steam_id, avatar, currTime, currTime])
     return res;
 }
 

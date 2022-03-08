@@ -18,7 +18,7 @@ export default nextConnect()
         let sid = new SteamID(session.steamid).getSteam2RenderedID(true);
         let user = await userGetBySteamId(sid);
         if (!user) {
-            await createUser(sid, session.personaname, session.avatarmedium, session.loccountrycode)
+            await createUser(sid, session.personaname, session.avatarmedium)
         }else if(user.name !== session.personaname || user.avatar !== session.avatarmedium) {
             await updateUserInfo(user.id, session.personaname, session.avatarmedium, user.vk_id)
         }

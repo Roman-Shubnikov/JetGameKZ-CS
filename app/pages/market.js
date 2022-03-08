@@ -1,5 +1,5 @@
 import { Button, Rating, Skeleton, TextField } from '@mui/material';
-import { Box, color } from '@mui/system';
+import { Box } from '@mui/system';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
