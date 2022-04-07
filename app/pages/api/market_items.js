@@ -3,7 +3,6 @@ import nextConnect from 'next-connect'
 export default nextConnect()
     .use(passport_middleware)
     .get(async (req, res) => {
-      console.log(req.region)
       let res_db = await dbGet('SELECT id, name, price, hot FROM products WHERE region=? ORDER BY hot DESC LIMIT 50', [req.region]);
       if (res_db.length > 0) {
         let product_ids = res_db.map((val, i) => val.id).join(',');

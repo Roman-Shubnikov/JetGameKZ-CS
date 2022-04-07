@@ -1,7 +1,5 @@
 import { Button, Rating, Skeleton, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import clsx from 'clsx';
-import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -12,6 +10,7 @@ import {
   Paragraph,
   RLayout, SignBase
 } from '../components';
+import Link from 'next/link'
 import { API_URL } from '../config';
 import { lang } from '../providers';
 import styles from './market.module.css'
@@ -67,7 +66,7 @@ const Market = props => {
   const getFeedback = () => {
     if(!user) return <Header>{lang.t('pages_content.auth_notif')}</Header>;
     if(!feedback) return Array(3).fill().map((skull, i) => <Skeleton key={i} width={300} height={300} className={styles.feedback_card} />);
-    if(feedback.length === 0) return <Header>Отзывов нет но такого быть не может</Header>;
+    if(feedback.length === 0) return <Header>Отзывов нет, но такого быть не может</Header>;
     return (feedback.feedback.map((val, i) => (
       <FeedbackCell
       key={val.id}
@@ -121,9 +120,12 @@ const Market = props => {
                 {val.price} {val.currency_name} /{lang.t('repeated.month')}
               </Header2>
             </Box>
-            <Button size='large' variant='contained' sx={{width: '100%', color: '#000', background: '#fff'}}>
-              {lang.t('repeated.purchase')}
-            </Button>
+            <Link href='/pay' passHref>
+              <Button size='large' variant='contained' sx={{width: '100%', color: '#000', background: '#fff'}}>
+                {lang.t('repeated.purchase')}
+              </Button>
+            </Link>
+            
           </Box>
           )}
         </SignBase>

@@ -1,3 +1,17 @@
-.nested_info-card {
-    justify-content: space-around;
+.nested_info_column {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    
+}
+.nested_info_column:not(:last-child) {
+    margin-right: 5%;
+}
+.nested_info-card_plan {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.nested_info-card_plan_column {
+    line-height: 0.8;
 }

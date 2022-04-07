@@ -10,4 +10,6 @@ body[scheme="light"] {
     --cell_position: #9F9F9F;
     --nested_card_background: #ECECEC;
     --inputs_background: #DADADA;
+    --inputs_light: #DADADA;
+    --inputs_light_text: black;
 }
