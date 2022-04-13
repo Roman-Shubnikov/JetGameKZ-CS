@@ -7,11 +7,11 @@ import {
     RLayout, 
     SignBase,
     NestedCard,
-  } from '../components';
-import { lang } from '../providers';
+  } from '../../components';
+import { lang } from '../../providers';
 import { Box } from '@mui/system';
 import styles from './pay.module.css';
-import { FormControl, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, MenuItem, Select, TextField } from '@mui/material';
 import { useState } from 'react';
 
 const PayForm = props => {
@@ -51,7 +51,7 @@ const PayForm = props => {
                 sx={{
                   '& .MuiInputBase-root': 
                   { mt: 2, 
-                    backgroundColor: 'var(--inputs_light)', borderRadius:19,
+                    backgroundColor: 'var(--inputs_light)', borderRadius:3,
                     color: 'var(--inputs_light_text)'
                   },
                 }}
@@ -72,10 +72,38 @@ const PayForm = props => {
                   placeholder={lang.t('placeholders.promocode')}>
 
                   </TextField>
+                  <Button
+                  sx={{mt: 2}}
+                  variant='contained'
+                   onClick={() => {console.log(123)}}>
+                    {lang.t('repeated.purchase')}
+                  </Button>
                 </FormControl>
               </Box>
               <Box className={styles['nested_info_column']}>
-
+                <NestedCard color='var(--nested_card_background)' className={styles['nested_info-card_plan']}>
+                  <Box className={styles['nested_info-card_plan_column']}>
+                    <Caption>
+                      {lang.t('repeated.your')}
+                    </Caption>
+                    <Header style={{fontSize: 64, lineHeight: 1}}>
+                      {lang.t('repeated.balance')}
+                    </Header>
+                  </Box>
+                  <Box className={styles['nested_info-card_plan_column']}>
+                    <Header style={{fontSize: 64, lineHeight: '50px', marginBottom: 6}}>
+                      123
+                    </Header>
+                    <Caption>
+                      money
+                    </Caption>
+                  </Box>
+                </NestedCard>
+                <NestedCard color='var(--nested_card_background)' className={styles['nested_info-card_info']}>
+                  <Header2 color='var(--text_description)'>
+                  {lang.t('pages_content.pay_info')}
+                  </Header2>
+                </NestedCard>
               </Box>
             </SignBase>
       </Paragraph>

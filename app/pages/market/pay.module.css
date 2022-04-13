@@ -15,3 +15,7 @@
 .nested_info-card_plan_column {
     line-height: 0.8;
 }
+.nested_info-card_info {
+    margin-top: 16px;
+    padding: 50px;
+}

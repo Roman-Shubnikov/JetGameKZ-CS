@@ -9,16 +9,17 @@ import {
   Header2,
   Paragraph,
   RLayout, SignBase
-} from '../components';
+} from '../../components';
 import Link from 'next/link'
-import { API_URL } from '../config';
-import { lang } from '../providers';
-import styles from './market.module.css'
+import { API_URL } from '../../config';
+import { lang } from '../../providers';
+import styles from './index.module.css';
 
 export const getServerSideProps = async (context) => {
   let lang = context.req.cookies.language;
-  let res = await fetch(`${API_URL}/market_items?reg=${lang}`);
-  let products = await res.json();
+  // let res = await fetch(`${API_URL}/market_items?reg=${lang}`);
+  // let products = await res.json();
+  let products = [];
   return {
     props: {
       products,
