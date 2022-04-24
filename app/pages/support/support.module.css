@@ -1,0 +1,13 @@
+
+
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-grid_card {
+    flex-direction: column;
+    margin: 24px;
+    padding: 30px;
+}
