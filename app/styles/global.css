@@ -10,6 +10,8 @@ h1, h2 {
 }
 body {
     --font-family: "Bebas Regular", system-ui, "Helvetica Neue", Roboto, sans-serif;
+    --online: #1DCC00;
+    --red: #FF0000;
     background-color: var(--background_root) !important;
     font-family: var(--font-family) !important;
     overflow-x: hidden;

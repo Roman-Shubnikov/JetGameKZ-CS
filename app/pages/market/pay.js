@@ -1,6 +1,5 @@
 import {
     Caption,
-    FeedbackCell,
     Header,
     Header2,
     Paragraph,

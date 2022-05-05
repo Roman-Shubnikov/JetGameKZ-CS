@@ -1,0 +1,38 @@
+.heading {
+    width: 100%;
+    height: 300px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+}
+.heading_avatar_root {
+    margin: 0 38px 0 83px;
+    position: relative;
+    display: flex;
+    
+}
+.heading_avatar_caption {
+    border-radius: 20px;
+    background-color: var(--red);
+    text-align: center;
+    position: absolute;
+    width: 80%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 3px;
+}
+.heading_body {
+    display: flex;
+    flex-direction: column;
+}
+.heading_body_title {
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+}
+.heading_body_caption {
+    font-size: 18px;
+    opacity: 0.4;
+}

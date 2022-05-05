@@ -52,8 +52,12 @@
         "market_descr": "Покупка привилегий, товаров, подписок...",
         "pay": "Оплата",
         "pay_descr": "Покупка и оплата товара",
+<<<<<<< Updated upstream
         "support": "Справка",
         "support_descr": "Столкнулись с проблемой? вам сюда!"
+=======
+        "profile": "Профиль"
+>>>>>>> Stashed changes
 
     },
     "pages_content": {

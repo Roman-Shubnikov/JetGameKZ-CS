@@ -7,3 +7,4 @@ export { Paragraph } from './paragraph/paragraph';
 export { Cell } from './cell/cell';
 export { FeedbackCell } from './feedbackCell/feedbackCell';
 export { NestedCard } from './nestedcard/nestedcard';
+export { OnlineCircle } from './onlineCircle/onlineCircle';
