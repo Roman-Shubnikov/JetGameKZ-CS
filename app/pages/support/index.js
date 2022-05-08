@@ -20,7 +20,7 @@ import { styled, alpha } from '@mui/material/styles';
 import React from 'react'
 
 const Boxes = [
-    {title: "ЧТО ДЕЛАТ, ЕСЛИ Я КУПИЛ ДОНАТ, А У МЕНЯ ОН НЕ ПОЯВИЛСЯ?", time: 1650818412, link: ""}, 
+    {title: "ЧТО ДЕЛАТЬ, ЕСЛИ Я КУПИЛ ДОНАТ, А У МЕНЯ ОН НЕ ПОЯВИЛСЯ?", time: 1650818412, link: ""},
 ]
 
 const Support = props => {

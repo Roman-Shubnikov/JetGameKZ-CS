@@ -36,3 +36,47 @@
     font-size: 18px;
     opacity: 0.4;
 }
+.root {
+    flex-direction: column;
+}
+.servers_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.servers_item {
+    width: 350px;
+    height: 154px;
+    margin: 20px;
+    padding: 40px 80px;
+    border-radius: 23px;
+    align-items: center;
+    text-align: left;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-width: 350px;
+}
+.servers_item_content {
+    position: absolute;
+}
+.servers_item_button {
+    padding: 0 80px
+}
+.servers_item_texts {
+    margin-bottom: 15px;
+}
+.news_card_g {
+    position: absolute;
+    border-radius: 23px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.64))
+}
+.card_caption {
+    font-size: 14px;
+    color: var(--inputs_light_text);
+}
