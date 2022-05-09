@@ -24,13 +24,13 @@ const ServerPreview = ({name, onlines, server_id, image, ticks, map_name}) => {
           <Box className={styles.servers_item_texts}>
               <Caption>{name}</Caption>
               <div className={styles.card_caption}>
-                  {lang.t('repeated.online')}: {onlines} • ТИКРЕЙТ: {ticks} • КАРТА: {map_name}
+                  {lang.t('repeated.online')}: {onlines} • {lang.t('repeated.tickreit')}: {ticks} • {lang.t('repeated.map')}: {map_name}
               </div>
           </Box>
           <Button 
           variant='contained'
           className={styles.servers_item_button} onClick={() => {console.log(server_id)}}>
-              {lang.t('repeated.view')}
+              {lang.t('repeated.connect_to')}
             </Button>
         </Box>
         
@@ -72,14 +72,63 @@ const Profile = props => {
                         </>}>
                         <Box className={styles['server_box']}>
                             <ServerPreview
-                            name='Что-нибудь тестовое :D'
+                            name='Сервер 000'
                             map_name='Dust'
                             ticks={128}
                             image={'/assets/test.png'}>
                             </ServerPreview>
                         </Box>
                         </Paragraph>
+                        
+                        <Paragraph
+                        head={<>
+                        <Header2>
+                            {lang.t('pages_content.prevoisly_playing')}
+                        </Header2>
+                        </>}>
+                        <Box className={styles['server_box']}>
+                            <ServerPreview
+                            name='Сервер 001'
+                            map_name='Sandstone'
+                            ticks={128}
+                            image={'/assets/test.png'}>
+                            </ServerPreview>
+                        
+                            <ServerPreview
+                            name='Сервер 002'
+                            map_name='Nuke'
+                            ticks={128}
+                            image={'/assets/test.png'}>
+                            </ServerPreview>
+                        
+                            <ServerPreview
+                            name='Сервер 003'
+                            map_name='Mirage'
+                            ticks={128}
+                            image={'/assets/test.png'}>
+                            </ServerPreview>
+                        
+                            <ServerPreview
+                            name='Сервер 004'
+                            map_name='Sandstone'
+                            ticks={128}
+                            image={'/assets/test.png'}>
+                            </ServerPreview>
+                        </Box>
+                        </Paragraph>
+
+                        <Paragraph
+                        head={<>
+                        <Header2>
+                            {lang.t('repeated.statistic')}
+                        </Header2>
+                        </>}>
+                            <Box>
+                                
+                            </Box>
+                        </Paragraph>
                     </Box>
+                    
                 </SignBase>
             </Paragraph>
         </div>
